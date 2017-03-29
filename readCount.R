@@ -31,7 +31,7 @@ inputFile <- opt$bam
 gtf <- opt$gtf
 
 # Set output file
-outputFile <- sub(".bam$", "_rc.txt", inputFile)
+outputFile <- file.path(getwd(), basename(sub(".bam$", "_rc.txt", inputFile)))
 
 # Count reads
 feature <- featureCounts(
