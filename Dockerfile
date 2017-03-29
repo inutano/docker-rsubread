@@ -28,7 +28,9 @@ RUN apt-get update -y && apt-get install -y libxml2-dev \
    r-cran-rpart \
    r-cran-spatial \
    r-cran-survival
+RUN apt-get clean
 RUN echo 'local({r <- getOption("repos"); r["CRAN"] <- "http://cran.r-project.org"; options(repos=r)})' > ~/.Rprofile
 RUN R -e 'source("http://bioconductor.org/biocLite.R"); biocLite("Rsubread")'
-RUN apt-get clean
+RUN R -e 'install.packages("optparse")'
+ADD readCount.R /
 CMD ["R", "--no-save"]
