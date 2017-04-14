@@ -3,9 +3,16 @@
 #   $ Rscript --vanilla ./readCount.R /path/to/Aligned.toTranscriptome.out.bam /path/to/genes.gtf
 #
 
-# Load library
-library(Rsubread)
-library(optparse)
+# Load library, install if missing
+if( require("Rsubread") ) {} else {
+  source("http://bioconductor.org/biocLite.R")
+  biocLite("Rsubread")
+}
+
+if( require("optparse") ) {} else {
+  install.packages("optparse", repos='http://cran.r-project.org')
+  require("optparse")
+}
 
 # Parse arguments
 option_list = list(
